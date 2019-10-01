@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+<parameter name="configFileName" value="QABrowserConfig.txt" />
+<listeners>
+
+<listener class-name="com.apple.listeners.TakeScreenShotOnError" />
+<listener class-name="com.apple.listeners.TestListener" />
+<listener class-name="org.uncommons.reportng.HTMLReporter" />
+<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+
+</listeners>
+
+<!-- Tests Start Here -->
+
+ <!-- <test name="Global Navigation Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+	<class name="com.apple.tests.GlobalNavTests"/>	
+  </classes>
+  
+  </test> 
+  
+  <test name="Global Footer Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+	<class name="com.apple.tests.GlobalFooterTests"/>	
+  </classes>
+  
+  </test> 
+  
+  <test name="Product Navigation Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+ 
+   	<class name="com.apple.tests.ProductNavTests"/>
+   
+  </classes>
+  
+  </test>  -->
+  
+  <test name="Directory Navigation Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+ 
+   	<class name="com.apple.tests.DirectoryNavTests"/>
+   	
+  </classes>
+  
+  </test> 
+
+ <!-- <test name="BreadCrumbs Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+ 
+   	<class name="com.apple.tests.BreadCrumbTests"/>
+  
+  </classes>
+  
+  </test> 
+
+ <test name="404 Check Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+  
+  	<class name="com.apple.tests.StatusCheckTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="SEO Attributes Check Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "Launch" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+  
+  	<class name="com.apple.tests.SEOCheckTests"/>
+  	
+  </classes>
+  
+  </test>  -->
+  
+   <!-- <test name="Video Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <groups> 
+ 	<run> 
+ 		<include name = "video" />
+ 	</run>
+ 
+ </groups>
+
+  <classes>
+  
+  	<class name="com.apple.listeners.IOSTests"/>
+	
+  </classes>
+  
+  </test>  -->
+  
+  </suite>

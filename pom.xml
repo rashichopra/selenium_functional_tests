@@ -1,0 +1,631 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.apple.marcom</groupId>
+  <artifactId>applecom_functional_test</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+   <packaging>jar</packaging>
+
+  <name>applecom_functional_test</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <reporting>
+<plugins>
+<!-- TestNG-xslt related configuration. -->
+<plugin>
+<groupId>org.reportyng</groupId>
+<artifactId>reporty-ng</artifactId>
+<version>1.2</version>
+<configuration>
+<!-- Output directory for the testng xslt report -->
+<outputdir>${basedir}/target/testng-xslt-report</outputdir>
+<sorttestcaselinks>true</sorttestcaselinks>
+<testdetailsfilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testdetailsfilter>
+<showruntimetotals>true</showruntimetotals>
+</configuration>
+</plugin>
+</plugins>
+</reporting>
+<pluginRepositories>
+<pluginRepository>
+<id>reporty-ng</id>
+<url>https://github.com/cosminaru/reporty-ng/raw/master/dist/maven</url>
+</pluginRepository>
+</pluginRepositories>
+  <profiles>
+	  <profile>
+		  <id>IE8Tests</id>
+  		<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+                <suiteXmlFiles>
+                    <suiteXmlFile>IE8testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                 <systemPropertyVariables>
+	            <configFileName>Win7IE8Config.txt</configFileName>
+	          	</systemPropertyVariables>	
+            </configuration>
+            <goals>
+			<goal>test</goal>
+			</goals>
+      </plugin>
+      <plugin>
+	<groupId>ch.fortysix</groupId>
+	<artifactId>maven-postman-plugin</artifactId>
+	<version>0.1.6</version>
+	<executions>
+	  <execution>
+		<id>send_an_email</id>
+			<phase>site</phase>
+			<goals>
+				<goal>send-mail</goal>
+			</goals>
+			<inherited>true</inherited>
+			<configuration>
+			<skip>true</skip>
+				<from>rashi_chopra@apple.com</from>
+				<subject>Applecom Functional Test Results for IE8</subject>
+				<failonerror>true</failonerror>
+				<mailhost>mail.apple.com</mailhost>
+				<mailport>465</mailport>
+				<mailssl>true</mailssl>
+				<mailAltConfig>true</mailAltConfig>
+				<mailuser>rashi_chopra</mailuser>
+				<mailpassword></mailpassword>
+				<receivers>
+                    <receiver>rashi_chopra@apple.com</receiver>
+                </receivers>
+				<htmlMessage>
+                    <![CDATA[
+                    <p>Download all the attachments and click on "index.html" to view the Test Results </p>
+                    <br>
+					<p>Screenshots with "Fail" in the name are failure screenshots and the rest are screenshots of Pages under test. </p>
+					<br>
+					<p>Search Overlay Screenshots have the following format: search_<search keyword>_<browser><timestamp></p>
+					<br>
+					<br>
+                    ]]>
+                </htmlMessage>
+				<fileSets>
+                      <fileSet>
+                           <directory>${basedir}/target/site/reportyng-xslt</directory>
+                                 <includes>
+                                      <include>*.*</include>
+                                 </includes>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/screenshots</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/Pages</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/search</directory>
+                      </fileSet>
+               </fileSets>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+    </plugins>
+  </build>
+  <reporting>
+<plugins>
+<!-- TestNG-xslt related configuration. -->
+<plugin>
+<groupId>org.reportyng</groupId>
+<artifactId>reporty-ng</artifactId>
+<version>1.2</version>
+<configuration>
+<outputdir>${basedir}/target/testng-xslt-report/FF</outputdir>
+<sorttestcaselinks>true</sorttestcaselinks>
+<testdetailsfilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testdetailsfilter>
+<showruntimetotals>true</showruntimetotals>
+</configuration>
+</plugin>
+</plugins>
+</reporting>
+  </profile>
+    <profile>
+		  <id>SafariTests</id>
+  		<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+                <suiteXmlFiles>
+                    <suiteXmlFile>ProdSafaritestng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <systemPropertyVariables>
+	            <configFileName>Safari7D2Config.txt</configFileName>
+	          	</systemPropertyVariables>	
+            </configuration>
+            <goals>
+			<goal>test</goal>
+			</goals>
+      </plugin>
+       <plugin>
+	<groupId>ch.fortysix</groupId>
+	<artifactId>maven-postman-plugin</artifactId>
+	<version>0.1.6</version>
+	<executions>
+	  <execution>
+		<id>send_an_email</id>
+			<phase>site</phase>
+			<goals>
+				<goal>send-mail</goal>
+			</goals>
+			<inherited>true</inherited>
+			<configuration>
+			<skip>true</skip>
+				<from>rashi_chopra@apple.com</from>
+				<subject>Applecom Functional Test Results for Safari</subject>
+				<failonerror>true</failonerror>
+				<mailhost>mail.apple.com</mailhost>
+				<mailport>465</mailport>
+				<mailssl>true</mailssl>
+				<mailAltConfig>true</mailAltConfig>
+				<mailuser>rashi_chopra</mailuser>
+				<mailpassword></mailpassword>
+				<receivers>
+                    <receiver>rashi_chopra@apple.com</receiver>
+                </receivers>
+				<htmlMessage>
+                    <![CDATA[
+                    <p>Download the attachments and click on "index.html" to view the Test Results </p>
+                    <br>
+					<p>Screenshots with "Fail" in the name are failure screenshots</p>
+					<br>
+					<br>
+					<br>
+                    ]]>
+                </htmlMessage>
+				<fileSets>
+                      <fileSet>
+                           <directory>${basedir}/target/site/reportyng-xslt</directory>
+                                 <includes>
+                                      <include>*.*</include>
+                                 </includes>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/screenshots</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/Pages</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/search</directory>
+                      </fileSet>
+               </fileSets>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+    </plugins>
+  </build>
+  <reporting>
+<plugins>
+<!-- TestNG-xslt related configuration. -->
+<plugin>
+<groupId>org.reportyng</groupId>
+<artifactId>reporty-ng</artifactId>
+<version>1.2</version>
+<configuration>
+<outputdir>/target/testng-xslt-report</outputdir>
+<sorttestcaselinks>true</sorttestcaselinks>
+<testdetailsfilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testdetailsfilter>
+<showruntimetotals>true</showruntimetotals>
+<disable-output-escaping>yes</disable-output-escaping>
+</configuration>
+</plugin>
+</plugins>
+</reporting>
+  </profile>
+    <profile>
+		  <id>ProdIE10</id>
+  		<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+                <suiteXmlFiles>
+                    <suiteXmlFile>ProdIE10testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <systemPropertyVariables>
+	            <configFileName>ProdIE10Config.txt</configFileName>
+	          	</systemPropertyVariables>	
+            </configuration>
+            <goals>
+			<goal>test</goal>
+			</goals>
+      </plugin>
+       <plugin>
+	<groupId>ch.fortysix</groupId>
+	<artifactId>maven-postman-plugin</artifactId>
+	<version>0.1.6</version>
+	<executions>
+	  <execution>
+		<id>send_an_email</id>
+			<phase>site</phase>
+			<goals>
+				<goal>send-mail</goal>
+			</goals>
+			<inherited>true</inherited>
+			<configuration>
+			<skip>true</skip>
+				<from>rashi_chopra@apple.com</from>
+				<subject>Applecom Functional Test Results for IE10</subject>
+				<failonerror>true</failonerror>
+				<mailhost>mail.apple.com</mailhost>
+				<mailport>465</mailport>
+				<mailssl>true</mailssl>
+				<mailAltConfig>true</mailAltConfig>
+				<mailuser>rashi_chopra</mailuser>
+				<mailpassword>Gunjaa18</mailpassword>
+				<receivers>
+                    <receiver>rashi_chopra@apple.com</receiver>
+                </receivers>
+				<htmlMessage>
+                    <![CDATA[
+                    <p>Download the attachments and click on "index.html" to view the Test Results </p>
+                    <br>
+					<p>Screenshots with "Fail" in the name are failure screenshots. </p>
+					<br>
+                    <p>Search Overlay Screenshots have the following format: search_<search keyword>_<browser><timestamp>.</p>
+					<br>
+					<br>
+                    ]]>
+                </htmlMessage>
+				<fileSets>
+                      <fileSet>
+                           <directory>${basedir}/target/site/reportyng-xslt</directory>
+                                 <includes>
+                                      <include>*.*</include>
+                                 </includes>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/screenshots</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/Pages</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/search</directory>
+                      </fileSet>
+               </fileSets>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+    </plugins>
+  </build>
+  <reporting>
+<plugins>
+<!-- TestNG-xslt related configuration. -->
+<plugin>
+<groupId>org.reportyng</groupId>
+<artifactId>reporty-ng</artifactId>
+<version>1.2</version>
+<configuration>
+<outputdir>/target/testng-xslt-report</outputdir>
+<sorttestcaselinks>true</sorttestcaselinks>
+<testdetailsfilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testdetailsfilter>
+<showruntimetotals>true</showruntimetotals>
+<disable-output-escaping>yes</disable-output-escaping>
+</configuration>
+</plugin>
+</plugins>
+</reporting>
+  </profile>
+   <profile>
+		  <id>ProdSafari</id>
+  		<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+                <suiteXmlFiles>
+                    <suiteXmlFile>ProdSafaritestng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <systemPropertyVariables>
+	            <configFileName>ProdSafariConfig.txt</configFileName>
+	          	</systemPropertyVariables>	
+            </configuration>
+            <goals>
+			<goal>test</goal>
+			</goals>
+      </plugin>
+       <plugin>
+	<groupId>ch.fortysix</groupId>
+	<artifactId>maven-postman-plugin</artifactId>
+	<version>0.1.6</version>
+	<executions>
+	  <execution>
+		<id>send_an_email</id>
+			<phase>site</phase>
+			<goals>
+				<goal>send-mail</goal>
+			</goals>
+			<inherited>true</inherited>
+			<configuration>
+			<skip>true</skip>
+				<from>rashi_chopra@apple.com</from>
+				<subject>Applecom Functional Test Results for Safari</subject>
+				<failonerror>true</failonerror>
+				<mailhost>mail.apple.com</mailhost>
+				<mailport>465</mailport>
+				<mailssl>true</mailssl>
+				<mailAltConfig>true</mailAltConfig>
+				<mailuser>rashi_chopra</mailuser>
+				<mailpassword>Gunjaa18</mailpassword>
+				<receivers>
+                    <receiver>rashi_chopra@apple.com</receiver>
+                </receivers>
+				<htmlMessage>
+                    <![CDATA[
+                    <p>Download the attachments and click on "index.html" to view the Test Results </p>
+                    <br>
+					<p>Screenshots with "Fail" in the name are failure screenshots. </p>
+					<br>
+					<br>
+					<br>
+                    ]]>
+                </htmlMessage>
+				<fileSets>
+                      <fileSet>
+                           <directory>${basedir}/target/site/reportyng-xslt</directory>
+                                 <includes>
+                                      <include>*.*</include>
+                                 </includes>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/screenshots</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/Pages</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/search</directory>
+                      </fileSet>
+               </fileSets>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+    </plugins>
+  </build>
+  <reporting>
+<plugins>
+<!-- TestNG-xslt related configuration. -->
+<plugin>
+<groupId>org.reportyng</groupId>
+<artifactId>reporty-ng</artifactId>
+<version>1.2</version>
+<configuration>
+<outputdir>${basedir}/target/testng-xslt-report/Safari</outputdir>
+<sorttestcaselinks>true</sorttestcaselinks>
+<testdetailsfilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testdetailsfilter>
+<showruntimetotals>true</showruntimetotals>
+</configuration>
+</plugin>
+</plugins>
+</reporting>
+  </profile>
+   <profile>
+		  <id>QA</id>
+  		<build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.16</version>
+        <configuration>
+        <testFailureIgnore>true</testFailureIgnore>
+                <suiteXmlFiles>
+                    <suiteXmlFile>QAtestng.xml</suiteXmlFile>
+                </suiteXmlFiles>
+                <systemPropertyVariables>
+	            <configFileName>QABrowserConfig.txt</configFileName>
+	          	</systemPropertyVariables>	
+            </configuration>
+            <goals>
+			<goal>test</goal>
+			</goals>
+      </plugin>
+       <plugin>
+	<groupId>ch.fortysix</groupId>
+	<artifactId>maven-postman-plugin</artifactId>
+	<version>0.1.6</version>
+	<executions>
+	  <execution>
+		<id>send_an_email</id>
+			<phase>site</phase>
+			<goals>
+				<goal>send-mail</goal>
+			</goals>
+			<inherited>true</inherited>
+			<configuration>
+			<skip>true</skip>
+				<from>rashi_chopra@apple.com</from>
+				<subject>Applecom Functional Test Results for Firefox</subject>
+				<failonerror>true</failonerror>
+				<mailhost>mail.apple.com</mailhost>
+				<mailport>465</mailport>
+				<mailssl>true</mailssl>
+				<mailAltConfig>true</mailAltConfig>
+				<mailuser>rashi_chopra</mailuser>
+				<mailpassword></mailpassword>
+				<receivers>
+                    <receiver>rashi_chopra@apple.com</receiver>
+                </receivers>
+				<htmlMessage>
+                    <![CDATA[
+                    <p>Download the attachments and click on "index.html" to view the Test Results </p>
+                    <br>
+					<p>Screenshots with "Fail" in the name are failure screenshots and the rest are screenshots of Pages under test. </p>
+					<br>
+                    <p>Have a nice day.</p>
+					<br>
+					<br>
+                    ]]>
+                </htmlMessage>
+				<fileSets>
+                      <fileSet>
+                           <directory>${basedir}/target/site/reportyng-xslt</directory>
+                                 <includes>
+                                      <include>*.*</include>
+                                 </includes>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/screenshots</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/Pages</directory>
+                      </fileSet>
+                      <fileSet>
+                           <directory>${basedir}/target/search</directory>
+                      </fileSet>
+               </fileSets>
+			</configuration>
+		</execution>
+	</executions>
+</plugin>
+    </plugins>
+  </build>
+  <reporting>
+<plugins>
+<!-- TestNG-xslt related configuration. -->
+<plugin>
+<groupId>org.reportyng</groupId>
+<artifactId>reporty-ng</artifactId>
+<version>1.2</version>
+<configuration>
+<outputdir>/target/testng-xslt-report</outputdir>
+<sorttestcaselinks>true</sorttestcaselinks>
+<testdetailsfilter>FAIL,SKIP,PASS,CONF,BY_CLASS</testdetailsfilter>
+<showruntimetotals>true</showruntimetotals>
+<disable-output-escaping>yes</disable-output-escaping>
+</configuration>
+</plugin>
+</plugins>
+</reporting>
+  </profile>
+  </profiles>
+<dependencies>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>15.0</version>
+	</dependency> 
+ 	<dependency>
+	<groupId>org.seleniumhq.selenium</groupId>
+	<artifactId>selenium-java</artifactId>
+	<version>2.40.0</version>
+	</dependency>  
+	 <dependency>
+        <groupId>org.seleniumhq.selenium</groupId>
+        <artifactId>selenium-server</artifactId>
+        <version>2.40.0</version>
+    </dependency> 
+	<dependency>
+	<groupId>org.testng</groupId>
+	<artifactId>testng</artifactId>
+	<version>6.8</version>
+	</dependency>
+	<dependency>
+        <groupId>org.uncommons</groupId>
+        <artifactId>reportng</artifactId>
+        <version>1.1.4</version>
+        <scope>test</scope>
+        <exclusions>
+            <exclusion>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+            </exclusion>
+        </exclusions>
+    </dependency>
+    <dependency>
+    <groupId>com.google.inject</groupId>
+    <artifactId>guice</artifactId>
+    <version>3.0</version>
+    <scope>test</scope>
+</dependency>
+<dependency>
+<groupId>org.easytesting</groupId>
+<artifactId>fest-swing-testng</artifactId>
+<version>1.2.1</version>
+</dependency>
+	<dependency>
+  		<groupId>net.sourceforge.jexcelapi</groupId> 
+  		<artifactId>jxl</artifactId> 
+ 		 <version>2.6.3</version> 
+ 	 </dependency>
+	<dependency>
+  		<groupId>org.apache.poi</groupId> 
+ 		 <artifactId>poi</artifactId> 
+  		<version>3.7</version> 
+  	</dependency>
+  	 <dependency>
+        <groupId>log4j</groupId>
+        <artifactId>log4j</artifactId>
+        <version>1.2.17</version>
+      </dependency>
+     <dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging-api</artifactId>
+			<version>1.1</version>
+		</dependency>  
+	<dependency>
+        <groupId>org.sikuli</groupId>
+        <artifactId>sikuli-webdriver</artifactId>
+        <version>1.0.1</version>
+	</dependency>
+	<dependency>
+        <groupId>com.googlecode.fighting-layout-bugs</groupId>
+        <artifactId>fighting-layout-bugs</artifactId>
+        <version>0.5</version>
+    </dependency>
+     <dependency>
+      <groupId>org.jasypt</groupId>
+      <artifactId>jasypt</artifactId>
+      <version>1.9.2</version>
+      <scope>compile</scope>
+    </dependency>
+    <dependency>
+    <groupId>org.zeroturnaround</groupId>
+    <artifactId>zt-zip</artifactId>
+    <version>1.7</version>
+    <type>jar</type>
+	</dependency>
+	<dependency>
+	    <groupId>javax.mail</groupId>
+	    <artifactId>mail</artifactId>
+	    <version>1.4.3</version>
+    </dependency>
+    <dependency>
+    <groupId>net.mindengine</groupId>
+    <artifactId>galen</artifactId>
+    <version>0.10.0</version>
+	</dependency>
+ </dependencies>
+ </project>

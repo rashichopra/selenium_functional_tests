@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Project WWDC Test Results for Win7 IE8" parallel="false">
+<parameter name="configFileName" value="Win7IE8Config.txt" />
+<listeners>
+
+<listener class-name="com.apple.listeners.TakeScreenShotOnError" />
+<listener class-name="com.apple.listeners.TestListener" />
+<listener class-name="org.uncommons.reportng.HTMLReporter" />
+<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+<!-- <listener class-name="org.fest.swing.testng.listener.ScreenshotOnFailureListener" /> -->
+
+</listeners>
+
+<!-- Tests Start Here -->
+
+ <!-- <test name="Global Navigation Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+  <classes>
+    <class name="com.apple.tests.GlobalNavTests"/>
+  </classes>
+  </test>  -->
+  
+  <!-- <test name="Global Navigation Geo Tests">
+  <classes>
+    <class name="com.apple.tests.GeoTests"/>
+  </classes>
+  </test> --> 
+  
+  <test name="Local Navigation Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+  <classes>
+    <class name="com.apple.tests.iOSLocalNavTests"/>
+  </classes>
+  </test> 
+  
+  <!-- <test name="BreadCrumb Links Tests">
+  <classes>
+    <class name="com.apple.tests.BreadCrumbTests"/>
+  </classes>
+  </test> 
+  
+  <test name="Directory Nav Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+  <classes>
+    <class name="com.apple.tests.DirectoryNavTests"/>
+  </classes>
+  </test> 
+  
+  <test name="Global Footer Links Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+  <classes>
+    <class name="com.apple.tests.GlobalFooterTests"/>
+  </classes>
+  </test> 
+   -->
+  <!-- <test name="404 Links/Assets Tests">
+ <parameter name="filenamePath" value="resources/URL_List" />
+  <classes>
+	<class name="com.apple.tests.StatusCheckTests"/>
+  </classes>
+  </test>  -->
+  
+  
+ 
+</suite> 

@@ -1,0 +1,6 @@
+BROWSER=FF
+BASE_URL=@ic20.apple.com/
+MAX_WAIT_TIME_SECONDS=3
+REMOTE=no
+HUB=localhost
+PORT=4444

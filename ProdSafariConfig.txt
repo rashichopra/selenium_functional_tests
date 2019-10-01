@@ -1,0 +1,6 @@
+BROWSER=Safari
+BASE_URL=http://ic41.apple.com/
+MAX_WAIT_TIME_SECONDS=3
+REMOTE=no
+HUB=localhost
+PORT=4444

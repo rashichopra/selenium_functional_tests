@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Project Camel" parallel="false">
+
+<listeners>
+
+<listener class-name="com.apple.listeners.TakeScreenShotOnError" />
+<listener class-name="com.apple.listeners.TestListener" />
+<listener class-name="org.uncommons.reportng.HTMLReporter" />
+<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+<!-- <listener class-name="org.fest.swing.testng.listener.ScreenshotOnFailureListener" /> -->
+
+</listeners>
+
+<!-- Tests Start Here -->
+
+ <test name="Global Navigation Links Tests on Win 7 IE8">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="Win7IE8Config.txt" />
+  <classes>
+	<class name="com.apple.tests.GlobalNavTests"/>	
+  </classes>
+  
+  </test> 
+  
+  <!-- <test name="Search Tests for Win7 IE10">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="Win7IE10Config.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="Search Tests for Win FF">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="WinFFConfig.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="Search Tests for Win Chrome">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="WinChromeConfig.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="Search Tests for Mac FF">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="MacFFConfig.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="Search Tests for Mac Chrome">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="MacChromeConfig.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="Search Tests for Safari7 on D2">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="Safari7D2Config.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test> 
+  
+  <test name="Search Tests for Safari7 on MacBook Air">
+ <parameter name="filenamePath" value="resources/URL_List" />
+ <parameter name="configFileName" value="Safari7AirConfig.txt" />
+  <classes>
+  
+  	<class name="com.apple.tests.SearchTests"/>
+	
+  </classes>
+  
+  </test>  -->
+  
+</suite> 
