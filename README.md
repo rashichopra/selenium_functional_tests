@@ -1,4 +1,4 @@
-applecom_functional_tests
+selenium_functional_tests
 ========================
 
 <strong><p style="font-size:24px;">Selenium Based Functional Tests</p></strong>
@@ -17,19 +17,19 @@ You should be in /Users/[username]/test
 Run command:
 
     git init
-    git clone https://interactive-git.apple.com/rashichopra/applecom_functional_tests
-    cd applecom_functional_tests
+    git clone <git repo path>
+    cd selenium_functional_tests
     git tag (this will show you the latest version)
     git checkout -b (whatever the latest tag is)
     	*note: if you already have a clone, run git fetch --tags to get the latest tags
     
-You should now have the latest version of applecom_functional_tests
+You should now have the latest version of selenium_functional_tests
 
 <strong>To Run the tests </strong>
 
 To run the tests, get an IDE like eclipse with Maven and testng plugin. 
 Go to File->Import and Choose Maven->Existing Maven Projects, click Next.
-For the Root Directory, Browse and Choose the applecom_functional_tests that you just cloned. The pom.xml will show in the "Projects" Section.
+For the Root Directory, Browse and Choose the selenium_functional_tests that you just cloned. The pom.xml will show in the "Projects" Section.
 Make sure the pom.xml is selected and Click Finish.
 Your project is now ready for use.
 Right click on Prodtestng.xml file and Select Run As->TestNG Suite to run all tests.
@@ -40,14 +40,14 @@ CHANGELOG
 
 Current Features: 
 
-	1. Tests Global Nav, Global Footer, Product Nav, Directory Nav, SEO and 404 on all project pages, prototype done for Sochi.
-	2. Screenshots utility to take screenshot for all project pages for launch projects
-	3. Detailed Test Results Report with logs & Screenshots for failed tests
-	4. Can test against any ic branch (todo: Authentication)
-	5. Prototype for testing promos
-	6. Selenium Grid Setup
-	7. Jenkins Setup
-	8. Prototype for Search Overlay testing
+	1. Tests Global Nav, Global Footer, Product Nav, Directory Nav, SEO and 404 on all project pages.
+	2. Screenshots utility to take screenshot for all project pages.
+	3. Detailed Test Results Report with logs & Screenshots for failed tests.
+	4. Can test against any qa branch.
+	5. Prototype for testing promos.
+	6. Selenium Grid Setup.
+	7. Jenkins Setup.
+	8. Prototype for Search Overlay testing.
 
 
 Upcoming:
